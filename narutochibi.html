@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NARUTO GAME</title>
+    <script src="./js/narutochibi.js"></script>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+        <section id="character-choose">
+            <h1 id="title" >NARUTO *chibi* GAME</h1>
+            <h2 id="subtitle">Choose a character:</h2>
+            
+            <div class="cards">
+                <input type="radio" name="character" id="naruto"/>
+                <label class="character" for="naruto">
+                    <p>Naruto Uzumaki</p>
+                    <img src="./img/Naruto.png" alt="Naruto">
+                </label>
+
+                <input type="radio" name="character" id="minato"/>
+                <label class="character" for="minato">
+                    <p>Minato Namikaze</p>
+                    <img src="./img/Minato.png" alt="Minato">
+                </label>
+                
+                <input type="radio" name="character" id="itachi"/>
+                <label class="character" for="itachi">
+                    <p>Itachi Uchiha</p>
+                    <img id="itachi" src="./img/Itachi.png" alt="Itachi">
+                </label>
+            </div>
+
+                <button id="button-character" class="character-button">Select</button>
+                <button id="button-random" class="character-button">Random</button>
+            </section>
+            
+            <section id="attack-choose">
+                <h1 id="title" >NARUTO *chibi* GAME</h1>
+                <h2>Choose your jutsu:</h2>
+                
+                <div class="attack-cards">   
+                    <button id="fire-button" class="attack-button">Katon 🔥</button>
+                    <button id="water-button" class="attack-button">Suiton 💧</button>
+                    <button id="earth-button" class="attack-button">Doton 🌱</button>
+                    <button id="wind-button" class="attack-button">Fuuton 🌪️</button>
+                    <button id="lightning-button" class="attack-button">Raiton ⚡</button>
+                </div>
+
+                <div id="messages">
+                    <p id="fight-result">Good Luck</p>
+
+                    <section id="restart">
+                        <button id="restart-button">Restart</button>
+                    </section>
+                </div>
+                
+                <div class="fight-column">
+                    <div class="player-fight">
+                        <span id="player-lives">3</span>
+                        <span id="player-character"></span>
+                        <div id="player-attack"></div>
+                    </div>
+
+                    <div class="enemy-fight">
+                        <span id="enemy-lives">3</span>
+                        <span id="enemy-character"></span>
+                        <div id="enemy-attack"></div>
+                    </div>
+                </div>
+            </section>
+    </body>
+</html>

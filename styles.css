@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Skranji&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Skranji&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #eb6534;
+}
+
+#character-choose {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#title {
+    color: white;
+    letter-spacing: 3px;
+    font-size: 50px;
+    text-align: center;
+    display: flex;
+}
+
+#subtitle {
+    color: white;
+    font-size: 35px;
+    
+}
+.cards, .attack-cards {
+    display: flex;
+    gap: 10px;
+    
+}
+
+.character {
+    cursor: pointer;
+    width: 225px;
+    height: 196px;
+    background-color: #fc7a1e;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.character img {
+    width: 139px;
+}
+input {
+    display: none;
+}
+input:checked + label {
+    background-color: red;
+}
+
+.character-button {
+    width: 180px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid white;
+    background-color: transparent;
+    color: white;
+    margin-top: 10px;
+}
+
+#attack-choose {
+    flex-direction: column;
+    align-items: center;
+}
+
+.attack-button {
+    background-color: #fc7a1e ;
+    border-color: transparent;
+    width: 115px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+#messages {
+    width: 280px;
+    background-color: pink;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#restart-button {
+    border: transparent;
+    background-color: blue;
+    color: white;
+}
+
+.fight-column {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 100px 100px;
+    color: white;
+    display: flex;
+    align-items: center;
+
+}
+
+#player-lives, #enemy-lives{
+    font-size: 32px;
+    margin-bottom: 0;
+}
+.player-fight, .enemy-fight {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+@media (max-width: 400px) {
+    .cards, .attack-cards {
+        flex-direction: column;
+    }
+}
+/* ver tutorial de midudev para efecto de cartas
