@@ -19,10 +19,12 @@ const spanEnemyLives = document.getElementById('enemy-lives')
 const result = document.getElementById('fight-result')
 const attackPlayer = document.getElementById('player-attack')
 const attackEnemy = document.getElementById('enemy-attack')
+const cardsContainer = document.getElementById('cardsContainer')
 
 let characters = []
 let playerAttack
 let enemyAttack
+let characterOption
 let playerLives = 3;
 let enemyLives = 3;
 
@@ -31,6 +33,7 @@ class Character {
         this.name = name
         this.pic = pic
         this.lives = lives
+        this.attacks = []
     }
 }
 
@@ -38,9 +41,44 @@ let naruto = new Character('Naruto Uzumaki', './img/Naruto.png', 3)
 let minato = new Character('Minato Namikaze', './img/Minato.png', 3)
 let itachi = new Character('Itachi Uchiha', './img/Itachi.png', 3)
 
+naruto.attacks.push(
+    { name: '🌪️', id: 'wind-button' },
+    { name: '🌪️', id: 'wind-button' },
+    { name: '🌪️', id: 'wind-button' },
+    { name: '🌱', id: 'earth-button' },
+    { name: '🌱', id: 'earth-button' }
+)
+
+minato.attacks.push(
+    { name: '🌪️', id: 'wind-button' },
+    { name: '🌪️', id: 'wind-button' },
+    { name: '🌪️', id: 'wind-button' },
+    { name: '💧', id: 'water-button' },
+    { name: '💧', id: 'water-button' }
+)
+
+itachi.attacks.push(
+    { name: '🔥', id: 'fire-button' },
+    { name: '🔥', id: 'fire-button' },
+    { name: '🔥', id: 'fire-button' },
+    { name: '🌪️', id: 'wind-button' },
+    { name: '🌪️', id: 'wind-button' }
+)
+
 characters.push(naruto, minato, itachi)
 
 function startGame() {
+    characters.forEach((Character) => {
+        characterOption = `
+        <input type="radio" name="character" id=${Character.name}/>
+                <label class="character" for=${Character.nombre}>
+                    <p>${Character.name}</p>
+                    <img src=${Character.pic} alt=${Character.name}>
+                </label>
+     `
+    cardsContainer.innerHTML += characterOption
+    })
+
     characterPlayerButton.addEventListener('click', choosingPlayerCharacter) 
     characterRandomButton.addEventListener('click', randomPlayerCharacter)
 
