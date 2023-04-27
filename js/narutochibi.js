@@ -7,11 +7,7 @@ const lightningButton = document.getElementById('lightning-button')
 const sectionChoosingAtacck = document.getElementById('attack-choose')
 const sectionRestart = document.getElementById('restart')
 const restartButton = document.getElementById('restart-button')
-const characterRandomButton = document.getElementById('button-random')
 const sectionChoosingCharacter = document.getElementById('character-choose')
-const inputNaruto = document.getElementById('naruto')
-const inputMinato = document.getElementById('minato')
-const inputItachi = document.getElementById('itachi')
 const spanPlayerCharacter = document.getElementById('player-character')
 const spanRandomCharacter = document.getElementById('enemy-character')
 const spanPlayerLives = document.getElementById('player-lives')
@@ -24,22 +20,26 @@ const cardsContainer = document.getElementById('cardsContainer')
 let characters = []
 let playerAttack
 let enemyAttack
+let inputNaruto
+let inputMinato
+let inputItachi
 let characterOption
 let playerLives = 3;
 let enemyLives = 3;
 
 class Character {
-    constructor(name, pic, lives) {
+    constructor(name, pic, lives, id) {
         this.name = name
         this.pic = pic
         this.lives = lives
+        this.id = id
         this.attacks = []
     }
 }
 
-let naruto = new Character('Naruto Uzumaki', './img/Naruto.png', 3)
-let minato = new Character('Minato Namikaze', './img/Minato.png', 3)
-let itachi = new Character('Itachi Uchiha', './img/Itachi.png', 3)
+let naruto = new Character('Naruto Uzumaki', './img/Naruto.png', 3, 'naruto')
+let minato = new Character('Minato Namikaze', './img/Minato.png', 3, 'minato')
+let itachi = new Character('Itachi Uchiha', './img/Itachi.png', 3, 'itachi')
 
 naruto.attacks.push(
     { name: '🌪️', id: 'wind-button' },
@@ -70,17 +70,20 @@ characters.push(naruto, minato, itachi)
 function startGame() {
     characters.forEach((Character) => {
         characterOption = `
-        <input type="radio" name="character" id=${Character.name}/>
-                <label class="character" for=${Character.nombre}>
+        <input type="radio" name="character" id=${Character.id} />
+                <label class="character" for=${Character.id}>
                     <p>${Character.name}</p>
                     <img src=${Character.pic} alt=${Character.name}>
                 </label>
      `
     cardsContainer.innerHTML += characterOption
+
+     inputNaruto = document.getElementById('naruto')
+     inputMinato = document.getElementById('minato')
+     inputItachi = document.getElementById('itachi')
     })
 
-    characterPlayerButton.addEventListener('click', choosingPlayerCharacter) 
-    characterRandomButton.addEventListener('click', randomPlayerCharacter)
+    characterPlayerButton.addEventListener('click', choosingPlayerCharacter)
 
     fireButton.addEventListener('click', fireAttack)
     waterButton.addEventListener('click', waterAttack)
@@ -104,47 +107,30 @@ function choosingPlayerCharacter() {
     sectionRestart.style.display = 'none'
 
     if (inputNaruto.checked) {
-        spanPlayerCharacter.innerHTML = 'Naruto Uzumaki'
+        spanPlayerCharacter.innerHTML = naruto.name
         choosingEnemyCharacter()
     }   else if (inputMinato.checked) {
-        spanPlayerCharacter.innerHTML = 'Minato Namikaze'
+        spanPlayerCharacter.innerHTML = minato.name
         choosingEnemyCharacter()
     }   else if (inputItachi.checked) {
-        spanPlayerCharacter.innerHTML = 'Itachi Uchiha'
+        spanPlayerCharacter.innerHTML = itachi.name
         choosingEnemyCharacter()
     }   else {
         alert('You must select a character to continue!')
     }
 
     characterPlayerButton.disabled = true
-    characterRandomButton.disabled = true
-} 
-
-function randomPlayerCharacter() {
-    let randomCharacter = random(1,3)
-
-    if (randomCharacter == 1) {
-        spanPlayerCharacter.innerHTML = 'Naruto Uzumaki'
-    } else if (randomCharacter == 2) {
-        spanPlayerCharacter.innerHTML = 'Minato Namikaze'
-    } else {
-        spanPlayerCharacter.innerHTML = 'Itachi Uchiha'
-    }
-    choosingEnemyCharacter()
-    
-    characterPlayerButton.disabled = true
-    characterRandomButton.disabled = true
 }
 
 function choosingEnemyCharacter() {
     let randomCharacter = random(1,3)
 
     if (randomCharacter == 1) {
-        spanRandomCharacter.innerHTML = 'Naruto Uzumaki'
+        spanRandomCharacter.innerHTML = naruto.name
     } else if (randomCharacter == 2) {
-        spanRandomCharacter.innerHTML = 'Minato Namikaze'
+        spanRandomCharacter.innerHTML = minato.name
     } else {
-        spanRandomCharacter.innerHTML = 'Itachi Uchiha'
+        spanRandomCharacter.innerHTML = itachi.name
     }
 }
 
