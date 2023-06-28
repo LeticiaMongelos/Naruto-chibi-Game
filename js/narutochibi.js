@@ -1,9 +1,4 @@
-const characterPlayerButton = document.getElementById('button-character') 
-const fireButton = document.getElementById('fire-button')
-const waterButton = document.getElementById('water-button')
-const earthButton = document.getElementById('earth-button')
-const windButton = document.getElementById('wind-button')
-const lightningButton = document.getElementById('lightning-button')
+const characterPlayerButton = document.getElementById('button-character')
 const sectionChoosingAtacck = document.getElementById('attack-choose')
 const sectionRestart = document.getElementById('restart')
 const restartButton = document.getElementById('restart-button')
@@ -16,6 +11,7 @@ const result = document.getElementById('fight-result')
 const attackPlayer = document.getElementById('player-attack')
 const attackEnemy = document.getElementById('enemy-attack')
 const cardsContainer = document.getElementById('cardsContainer')
+const attacksContainer = document.getElementById('attacks-container')
 
 let characters = []
 let playerAttack
@@ -23,6 +19,13 @@ let enemyAttack
 let inputNaruto
 let inputMinato
 let inputItachi
+let fireButton
+let waterButton
+let earthButton
+let windButton
+let lightningButton
+let characterPlayer
+let attacksPlayer
 let characterOption
 let playerLives = 3;
 let enemyLives = 3;
@@ -43,26 +46,26 @@ let itachi = new Character('Itachi Uchiha', './img/Itachi.png', 3, 'itachi')
 
 naruto.attacks.push(
     { name: '🌪️', id: 'wind-button' },
-    { name: '🌪️', id: 'wind-button' },
-    { name: '🌪️', id: 'wind-button' },
-    { name: '🌱', id: 'earth-button' },
-    { name: '🌱', id: 'earth-button' }
+    { name: '🔥', id: 'fire-button' },
+    { name: '🌱', id: 'earth-button'},
+    { name: '⚡', id: 'lightning-button'},
+    { name: '💧', id: 'water-button'}
 )
 
 minato.attacks.push(
     { name: '🌪️', id: 'wind-button' },
-    { name: '🌪️', id: 'wind-button' },
-    { name: '🌪️', id: 'wind-button' },
+    { name: '🌱', id: 'earth-button' },
+    { name: '⚡', id: 'lightning-button' },
     { name: '💧', id: 'water-button' },
-    { name: '💧', id: 'water-button' }
+    { name: '🔥', id: 'fire-button' }
 )
 
 itachi.attacks.push(
     { name: '🔥', id: 'fire-button' },
-    { name: '🔥', id: 'fire-button' },
-    { name: '🔥', id: 'fire-button' },
+    { name: '🌱', id: 'earth-button' },
+    { name: '💧', id: 'water-button' },
     { name: '🌪️', id: 'wind-button' },
-    { name: '🌪️', id: 'wind-button' }
+    { name: '⚡', id: 'lightning-button' }
 )
 
 characters.push(naruto, minato, itachi)
@@ -85,12 +88,6 @@ function startGame() {
 
     characterPlayerButton.addEventListener('click', choosingPlayerCharacter)
 
-    fireButton.addEventListener('click', fireAttack)
-    waterButton.addEventListener('click', waterAttack)
-    earthButton.addEventListener('click', earthAttack)
-    windButton.addEventListener('click', windAttack)
-    lightningButton.addEventListener('click', lightningAttack)
-
     restartButton.addEventListener('click', restartGame)
 
     sectionChoosingAtacck.style.display = 'none'
@@ -108,30 +105,58 @@ function choosingPlayerCharacter() {
 
     if (inputNaruto.checked) {
         spanPlayerCharacter.innerHTML = naruto.name
-        choosingEnemyCharacter()
+        characterPlayer = naruto.name
     }   else if (inputMinato.checked) {
         spanPlayerCharacter.innerHTML = minato.name
-        choosingEnemyCharacter()
+        characterPlayer = minato.name
     }   else if (inputItachi.checked) {
         spanPlayerCharacter.innerHTML = itachi.name
-        choosingEnemyCharacter()
+        characterPlayer = itachi.name
     }   else {
         alert('You must select a character to continue!')
     }
-
+    extractAttacks(characterPlayer)
+    choosingEnemyCharacter()
     characterPlayerButton.disabled = true
 }
 
-function choosingEnemyCharacter() {
-    let randomCharacter = random(1,3)
-
-    if (randomCharacter == 1) {
-        spanRandomCharacter.innerHTML = naruto.name
-    } else if (randomCharacter == 2) {
-        spanRandomCharacter.innerHTML = minato.name
-    } else {
-        spanRandomCharacter.innerHTML = itachi.name
+function extractAttacks(characterPlayer) {
+    let attacks
+    for (let i = 0; i < characters.length; i++) {
+        if (characterPlayer == characters[i].name) {
+            attacks = characters[i].attacks
+        }
+        
     }
+    showAttacks(attacks)
+}
+
+function showAttacks(attacks) {
+    attacks.forEach((attack) => {
+        attacksPlayer = `
+        <button id=${attack.id} class="attack-button"> 
+        ${attack.name} </button>
+        `
+        attacksContainer.innerHTML += attacksPlayer 
+    })
+
+     fireButton = document.getElementById('fire-button')
+     waterButton = document.getElementById('water-button')
+     earthButton = document.getElementById('earth-button')
+     windButton = document.getElementById('wind-button')
+     lightningButton = document.getElementById('lightning-button')
+
+     fireButton.addEventListener('click', fireAttack)
+     waterButton.addEventListener('click', waterAttack)
+     earthButton.addEventListener('click', earthAttack)
+     windButton.addEventListener('click', windAttack)
+     lightningButton.addEventListener('click', lightningAttack)
+}
+
+function choosingEnemyCharacter() {
+    let randomCharacter = random(0, characters.length -1)
+
+    spanRandomCharacter.innerHTML = characters[randomCharacter].name
 }
 
 function choosingEnemyAttack() {
